@@ -1,0 +1,34 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background-color:firebrick;
+}
+
+.arena{
+    display: grid;
+    grid-template-columns: repeat(40,1fr);
+    grid-template-rows: repeat(40,1fr);
+    height: 550px;
+    width: 550px;
+    border: 30px solid black;
+    border-radius: 20px;
+    box-shadow: 0 0 0 5px white, 0 0 0 15px black;
+}
+
+.snake{
+    background-color: black;
+    z-index: 1;
+    /* grid-column-start: 4;
+    grid-row-start: 2; */
+}
+
+.food{
+    background-color: greenyellow;
+}
