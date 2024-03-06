@@ -46,14 +46,13 @@ function drawFood(){
 
 // Generate Food
 function generateFood(){
-    console.log("fooooooood")
     let x = ~~(Math.random()*gridSize) + 1
     let y = ~~(Math.random()*gridSize) + 1
     
     return {x,y}
 }
 
-// Moving Snake
+// Move Snake
 function move(){
     
     const head = {...snakePosition[0]}
@@ -74,10 +73,19 @@ function move(){
     }
 
     snakePosition.unshift(head)
-    snakePosition.pop() 
+    
     draw()
+
+    if(head.x === foodPosition.x && head.y === foodPosition.y){
+        foodPosition = generateFood()
+    } else{
+        snakePosition.pop() 
+    }
 }
 
+function addBody(){}
+
+// Add kbd controls
 document.addEventListener("keydown",(e)=>{
     
     switch(e.key){
@@ -96,5 +104,5 @@ document.addEventListener("keydown",(e)=>{
     }
 })
 
-setInterval(move,60)
+setInterval(move,90)
 draw()
