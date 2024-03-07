@@ -1,7 +1,7 @@
 // Declaring Html Variables
 const arena = document.querySelector(".arena")
 const instructionText = document.querySelector(".instruction-text")
-const score = document.querySelector(".score")
+const scoreText = document.querySelector(".score")
 const highScoreText = document.querySelector(".high-score")
 
 // Defining Snake's Initial Position
@@ -12,6 +12,7 @@ let direction = "right"
 let gameInterval
 let gameSpeedDelay = 200
 let gameStarted = false
+let score = 0
 let highScore = parseInt(localStorage.getItem("highScore")) || 0
 updateHighScore()
 
@@ -96,6 +97,7 @@ function move(){
     draw()
 
     if(head.x === foodPosition.x && head.y === foodPosition.y){
+        score++
         updateHighScore()
         foodPosition = generateFood()
         increaseSpeed()
@@ -181,21 +183,18 @@ function resetGame(){
     foodPosition = generateFood()
     direction = "right"
     gameSpeedDelay = 200
-
-    updateScore()
+    score = 0
 }
 
 // Update Score
 function updateScore(){
-const currentScore = snakePosition.length - 1
-score.textContent = `Score: ${currentScore.toString().padStart(3,"0")}`
+scoreText.textContent = `Score: ${score.toString().padStart(3,"0")}`
 }
 
 // Update High Score
 function updateHighScore(){
-    const currentScore = snakePosition.length - 1
- if(currentScore > highScore){
-    highScore = currentScore  
+ if(score > highScore){
+    highScore = score  
 }
 
 localStorage.setItem("highScore",highScore)
