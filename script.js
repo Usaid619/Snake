@@ -13,7 +13,6 @@ let gameInterval
 let gameSpeedDelay = 200
 let gameStarted = false
 let highScore = parseInt(localStorage.getItem("highScore")) || 0
-console.log(highScore)
 updateHighScore()
 
 // Start the Game
@@ -64,6 +63,12 @@ function generateFood(){
     let x = ~~(Math.random()*gridSize) + 1
     let y = ~~(Math.random()*gridSize) + 1
     
+    for(let i = 1 ; i < snakePosition.length; i++){
+        if(x === snakePosition[i].x && y === snakePosition[i].y){
+        return generateFood()
+        } 
+       
+    }
     return {x,y}
 }
 
@@ -189,7 +194,6 @@ score.textContent = `Score: ${currentScore.toString().padStart(3,"0")}`
 // Update High Score
 function updateHighScore(){
     const currentScore = snakePosition.length - 1
-    console.log(currentScore,highScore)
  if(currentScore > highScore){
     highScore = currentScore  
 }
