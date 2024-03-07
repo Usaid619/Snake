@@ -42,11 +42,11 @@ border: 100px solid #ffffff16;
 content: "";
 top: -150%;
 left: 5%;
-height: 500%;
-width: 500%;
+height: 544%;
+width: 266%;
 border-radius: 50%;
 /* mix-blend-mode: soft-light; */
-border: 70px solid #ffffff16;
+border: 89px solid #ffffff16;
 }
 
 .arena-container{
@@ -59,23 +59,24 @@ border: 70px solid #ffffff16;
     border: 10px solid black;
     box-shadow: inset -4px 8px 0 0 #00000045;
     border-radius: inherit;
-    height: 550px;
-    width: 550px;
-    padding: 20px 0 0 0;
+    /* height: 550px;
+    width: 550px; */
+    padding: 20px 20px 10px 20px;
 }
 
 
 .arena{
     display: grid;
-    grid-template-columns: repeat(40,1fr);
-    grid-template-rows: repeat(40,1fr);
-    height: 90%;
-    width: 90%;
+    grid-template-columns: repeat(30,1fr);
+    grid-template-rows: repeat(30,1fr);
+    height: 500px;
+    width: 500px;
     border: 3px solid black;
 }
 
 .snake:first-child{
     background-color: red;
+    z-index: 2;
 }
 
 .snake{
@@ -83,14 +84,13 @@ border: 70px solid #ffffff16;
     border-radius: 4px;
     box-shadow: -1px 2px 0 0 #39393985;
     z-index: 1;
-    /* grid-column-start: 4;
-    grid-row-start: 2; */
+    overflow: hidden;
 }
 
 .food{
     border-radius: 50%;
-    border: 3px solid green;
-    background-color: greenyellow;
+    border: 3px solid #000;
+    background-color: #fff;
     box-shadow: -1px 2px 0 0 #39393985;
 }
 
@@ -99,9 +99,10 @@ border: 70px solid #ffffff16;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 7%;
-    width: 90%;
+    /* height: 7%; */
+    width: 100%;
     /* background-color: lightblue; */
+    margin-top: 5px;
     font-size: 18px;
     font-weight: 999;
 }
@@ -109,4 +110,15 @@ border: 70px solid #ffffff16;
 
 .game-info > *{
     text-shadow: -1px 2px 0 #39393957;    
+}
+
+.instruction-text{
+    position: absolute;
+    z-index: 1;
+    font-size: 32px;
+    text-wrap: balance;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
 }

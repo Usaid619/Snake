@@ -1,30 +1,43 @@
 // Declaring Html Variables
 const arena = document.querySelector(".arena")
+const instructionText = document.querySelector(".instruction-text")
+const score = document.querySelector(".score")
+const highScoreText = document.querySelector(".high-score")
 
 // Defining Snake's Initial Position
-let gridSize = 40
-let snakePosition = [{x:20,y:20}]
+let gridSize = 30
+let snakePosition = [{x:15,y:15}]
 let foodPosition = generateFood()
 let direction = "right"
+let gameInterval
+let gameSpeedDelay = 200
+let gameStarted = false
+let highScore = parseInt(localStorage.getItem("highScore")) || 0
+console.log(highScore)
+updateHighScore()
 
 // Start the Game
 function draw(){
     drawSnake(snakePosition)
     drawFood()
+    updateScore()
+    updateHighScore()
 }
 
 // Draw Snake
 function drawSnake(snakePos){
     arena.innerHTML = ""
-    snakePos.forEach(elem=>{
+    if(gameStarted){
+         snakePos.forEach(elem=>{
     const snakeBody = createGameElement("div","snake")
 
     setPosition(snakeBody,elem)
     arena.appendChild(snakeBody)
     })
-    
+    }
 }
 
+// Create Game Element
 function createGameElement(tag,className){
     const gameFragment = document.createElement(tag)
     gameFragment.className = className
@@ -39,9 +52,11 @@ function setPosition(element,position){
 
 // Draw Food
 function drawFood(){
-    const food = createGameElement("div","food")
+    if(gameStarted){
+       const food = createGameElement("div","food")
     setPosition(food,foodPosition)
-    arena.appendChild(food)
+    arena.appendChild(food) 
+    }
 }
 
 // Generate Food
@@ -73,21 +88,40 @@ function move(){
     }
 
     snakePosition.unshift(head)
-    
     draw()
 
     if(head.x === foodPosition.x && head.y === foodPosition.y){
+        updateHighScore()
         foodPosition = generateFood()
+        increaseSpeed()
+        clearInterval(gameInterval)
+        gameInterval = setInterval(()=>{
+            move()
+            checkCollision()
+            draw()
+        },gameSpeedDelay)
     } else{
         snakePosition.pop() 
     }
 }
 
-function addBody(){}
+// Start Game Function
+function startGame(){
+    gameStarted = true
+    instructionText.style.display = "none"
+    
+    gameInterval = setInterval(()=>{
+        move()
+        draw()
+        checkCollision()
+    },gameSpeedDelay)
+}
 
 // Add kbd controls
-document.addEventListener("keydown",(e)=>{
-    
+function handleKeyboardEvents(e){
+if((!gameStarted && e.key === " ") || (!gameStarted && e.code === "Space")){
+    startGame()
+   } else{
     switch(e.key){
         case "ArrowUp":
         direction = "up"
@@ -102,7 +136,74 @@ document.addEventListener("keydown",(e)=>{
         direction = "right"
         break
     }
-})
+   }
+}
 
-setInterval(move,90)
-draw()
+document.addEventListener("keydown",handleKeyboardEvents)
+
+// Increase Speed
+function increaseSpeed(){
+    if(gameSpeedDelay > 150){
+        gameSpeedDelay -= 5
+    } else if(gameSpeedDelay > 100){
+        gameSpeedDelay -= 3
+    } else if(gameSpeedDelay > 50){
+        gameSpeedDelay -= 2
+    } else if(gameSpeedDelay > 20){
+        gameSpeedDelay -= 1
+    }
+}
+
+// Check Collision
+function checkCollision(){
+    const head = snakePosition[0]
+    if(head.x < 1 || head.x > gridSize || head.y < 1 || head.y > gridSize){
+        resetGame()
+    }
+
+    for(let i = 1 ; i < snakePosition.length; i++){
+        if(head.x === snakePosition[i].x && head.y === snakePosition[i].y){
+            resetGame()
+        }
+    }
+}
+
+// Reset Game
+function resetGame(){
+    updateHighScore()
+    stopGame()
+    snakePosition = [{x:15,y:15}]
+    foodPosition = generateFood()
+    direction = "right"
+    gameSpeedDelay = 200
+
+    updateScore()
+}
+
+// Update Score
+function updateScore(){
+const currentScore = snakePosition.length - 1
+score.textContent = `Score: ${currentScore.toString().padStart(3,"0")}`
+}
+
+// Update High Score
+function updateHighScore(){
+    const currentScore = snakePosition.length - 1
+    console.log(currentScore,highScore)
+ if(currentScore > highScore){
+    highScore = currentScore  
+}
+
+localStorage.setItem("highScore",highScore)
+
+ highScoreText.textContent = `High Score: ${highScore.toString().padStart(3,"0")}`
+}
+
+// Stop Game
+function stopGame(){
+clearInterval(gameInterval)
+gameStarted = false
+instructionText.style.display = "block"
+}
+
+updateHighScore()
