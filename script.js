@@ -127,7 +127,32 @@ function startGame(){
 // Add kbd controls
 function handleKeyboardEvents(e){
 if((!gameStarted && e.key === " ") || (!gameStarted && e.code === "Space")){
-    startGame()
+    return startGame()
+   } 
+   
+   if(snakePosition.length > 1){
+    switch(e.key){
+        case "ArrowUp":
+            if(direction !== "down"){
+                direction = "up"
+            }
+        break
+        case "ArrowDown":
+            if(direction !== "up"){
+                direction = "down"
+            }
+        break
+        case "ArrowLeft":
+            if(direction !== "right"){
+                direction = "left"
+            }
+        break
+        case "ArrowRight":
+            if(direction !== "left"){
+                direction = "right"
+            }
+        break
+    }
    } else{
     switch(e.key){
         case "ArrowUp":
