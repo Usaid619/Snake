@@ -26,8 +26,8 @@ body{
 
 .reflection::before{
     position: absolute;
+    content: "";
     z-index: inherit;
-content: "";
 top: -80%;
 left: 4%;
 height: 350%;
@@ -38,8 +38,8 @@ border: 100px solid #ffffff16;
 
 .reflection::after{
     position: absolute;
+    content: "";
     z-index: inherit;
-content: "";
 top: -150%;
 left: 5%;
 height: 544%;
@@ -57,7 +57,7 @@ border: 89px solid #ffffff16;
     justify-content: center;
     background-color: #AACC99;
     border: 10px solid black;
-    box-shadow: inset -4px 8px 0 0 #00000045;
+    box-shadow: inset -4px 6px 0 0 #00000031;
     border-radius: inherit;
     /* height: 550px;
     width: 550px; */

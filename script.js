@@ -206,7 +206,7 @@ function resetGame(){
     stopGame()
     snakePosition = [{x:15,y:15}]
     foodPosition = generateFood()
-    direction = "right"
+    direction = "right" 
     gameSpeedDelay = 200
     score = 0
 }
