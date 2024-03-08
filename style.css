@@ -14,7 +14,7 @@ body{
     display: grid;
     place-items: center;
     height: 100vh;
-    background-color:firebrick;
+    background: repeating-radial-gradient(circle,#B8D4AA 0 30px,#AACC99 30px 50px,#B8D4AA 50px 80px);
 }
 
 .reflection{
