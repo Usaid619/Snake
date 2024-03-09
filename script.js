@@ -51,11 +51,12 @@ function setPosition(element,position){
 }
 
 // Draw Food
-function drawFood(){
+function drawFood(){     
     if(gameStarted){
        const food = createGameElement("div","food")
     setPosition(food,foodPosition)
     arena.appendChild(food) 
+    console.log("Food Drwaen")
     }
 }
 
@@ -68,7 +69,6 @@ function generateFood(){
         if(x === snakePosition[i].x && y === snakePosition[i].y){
         return generateFood()
         } 
-       
     }
     return {x,y}
 }
@@ -171,6 +171,7 @@ if((!gameStarted && e.key === " ") || (!gameStarted && e.code === "Space")){
    }
 }
 
+// Handle Key Presses
 document.addEventListener("keydown",handleKeyboardEvents)
 
 // Increase Speed
@@ -206,6 +207,7 @@ function resetGame(){
     stopGame()
     snakePosition = [{x:15,y:15}]
     foodPosition = generateFood()
+    console.log("Food Reset")
     direction = "right" 
     gameSpeedDelay = 200
     score = 0
@@ -234,4 +236,5 @@ gameStarted = false
 instructionText.style.display = "block"
 }
 
+// Update High Score On Opening
 updateHighScore()

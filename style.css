@@ -45,12 +45,10 @@ left: 5%;
 height: 544%;
 width: 266%;
 border-radius: 50%;
-/* mix-blend-mode: soft-light; */
 border: 89px solid #ffffff16;
 }
 
 .arena-container{
-    /* position: relative; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,11 +57,8 @@ border: 89px solid #ffffff16;
     border: 10px solid black;
     box-shadow: inset -4px 6px 0 0 #00000031;
     border-radius: inherit;
-    /* height: 550px;
-    width: 550px; */
     padding: 20px 20px 10px 20px;
 }
-
 
 .arena{
     display: grid;
@@ -89,24 +84,19 @@ border: 89px solid #ffffff16;
 
 .food{
     border-radius: 50%;
-    border: 3px solid #000;
-    background-color: #fff;
+    background: #000;
     box-shadow: -1px 2px 0 0 #39393985;
 }
-
 
 .game-info{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* height: 7%; */
     width: 100%;
-    /* background-color: lightblue; */
     margin-top: 5px;
     font-size: 18px;
     font-weight: 999;
 }
-
 
 .game-info > *{
     text-shadow: -1px 2px 0 #39393957;    
