@@ -56,7 +56,6 @@ function drawFood(){
        const food = createGameElement("div","food")
     setPosition(food,foodPosition)
     arena.appendChild(food) 
-    console.log("Food Drwaen")
     }
 }
 
@@ -207,7 +206,6 @@ function resetGame(){
     stopGame()
     snakePosition = [{x:15,y:15}]
     foodPosition = generateFood()
-    console.log("Food Reset")
     direction = "right" 
     gameSpeedDelay = 200
     score = 0
