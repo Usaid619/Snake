@@ -4,7 +4,7 @@ const instructionText = document.querySelector(".instruction-text")
 const scoreText = document.querySelector(".score")
 const highScoreText = document.querySelector(".high-score")
 
-// Defining Snake's Initial Position
+// Defining Game Variables
 let gridSize = 30
 let snakePosition = [{x:15,y:15}]
 let foodPosition = generateFood()
